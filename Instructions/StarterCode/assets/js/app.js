@@ -92,7 +92,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
         });
 
     circlesGroup.call(toolTip);
-
+       
     circlesGroup.on("mouseover", function (data) {
         toolTip.show(data);
     })
@@ -149,17 +149,21 @@ d3.csv("assets/data/data.csv").then(function (data, err) {
         .attr("cy", d => yLinearScale(d.obesity))
         .attr("r", 20)
         .attr("fill", "purple")
+        .style("stroke", "blue")
+        .attr("class", "stateCircle")
         .attr("opacity", ".5");
     
-    var circlesText = chartGroup.selectAll("text")
+    
+    var circlesText = chartGroup.selectAll("text")    
         .data(data)
         .enter()
-         .append("text")
-         .text(d => {
-             return d.abbr})
-         .attr("dx", d => xLinearScale(d[chosenXAxis]))
-         .attr("dy", d => yLinearScale(d.obesity))
-         .attr("font-size", "10")
+        .append("text")
+        .text(d => {
+          return d.abbr})
+        .attr("dx", d => xLinearScale(d[chosenXAxis]))
+        .attr("dy", d => yLinearScale(d.obesity))
+        .attr("font-size", "10")
+        .attr("class","stateText")
         
 
     //state abbreviate in circle. circlestext
@@ -199,8 +203,8 @@ d3.csv("assets/data/data.csv").then(function (data, err) {
         .text("Obesity (%)");
 
     // updateToolTip function above csv import
-    var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
-    var circlesText = updateToolTip(chosenXAxis, circlesText);
+    circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+    circlesText = updateToolTip(chosenXAxis, circlesText);
     
     // x axis labels event listener
     labelsGroup.selectAll("text")
@@ -230,6 +234,7 @@ d3.csv("assets/data/data.csv").then(function (data, err) {
                 // updates tooltips with new info
                 circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
                 circlesText = updateToolTip(chosenXAxis, circlesText);
+                
                 // changes classes to change bold text
                 if (chosenXAxis === "age") {
                     ageLabel
