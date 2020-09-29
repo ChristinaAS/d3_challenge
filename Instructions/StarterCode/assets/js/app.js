@@ -153,7 +153,7 @@ d3.csv("assets/data/data.csv").then(function (data, err) {
         .attr("class", "stateCircle")
         .attr("opacity", ".5");
     
-    
+    // state abbrivation in circle
     var circlesText = chartGroup.selectAll("text")    
         .data(data)
         .enter()
@@ -166,7 +166,6 @@ d3.csv("assets/data/data.csv").then(function (data, err) {
         .attr("class","stateText")
         
 
-    //state abbreviate in circle. circlestext
     // Create group for three x-axis labels
     var labelsGroup = chartGroup.append("g")
         .attr("transform", `translate(${width / 2}, ${height + 20})`);
